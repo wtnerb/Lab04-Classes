@@ -14,13 +14,11 @@ namespace TicTacToeTest
 
         [Fact] void CanEditBoard()
         {
-            Board a = new Board();
             Board b = new Board();
             b.Update(5, "X");
             b.Update(1, "X");
             b.Update(9, "O");
             b.Update(2, "X");
-            Assert.Equal("|1||2||3|\n|4||5||6|\n|7||8||9|\n", a.BoardAsString());
             Assert.Equal("|X||X||3|\n|4||X||6|\n|7||8||O|\n", b.BoardAsString());
         }
 
