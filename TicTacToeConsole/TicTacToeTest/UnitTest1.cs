@@ -16,7 +16,7 @@ namespace TicTacToeTest
         {
             Board a = new Board();
             Board b = new Board();
-            b.Arr[1][1] = "X";
+            b.Update(5, "X");
             Assert.Equal("|1||2||3|\n|4||5||6|\n|7||8||9|\n", a.BoardAsString());
             Assert.Equal("|1||2||3|\n|4||X||6|\n|7||8||9|\n", b.BoardAsString());
         }
