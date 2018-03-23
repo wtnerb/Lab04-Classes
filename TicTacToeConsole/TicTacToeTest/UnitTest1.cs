@@ -20,5 +20,12 @@ namespace TicTacToeTest
             Assert.Equal("|1||2||3|\n|4||5||6|\n|7||8||9|\n", a.BoardAsString());
             Assert.Equal("|1||2||3|\n|4||X||6|\n|7||8||9|\n", b.BoardAsString());
         }
+
+        [Fact] void CanMakePlayer()
+        {
+            Player tom = new Player("Tom", "A");
+            Assert.Equal("Tom", tom.Name);
+            Assert.Equal("A", tom.Symbol);
+        }
     }
 }
