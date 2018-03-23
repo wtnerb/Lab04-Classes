@@ -13,10 +13,10 @@ namespace TicTacToeConsole
             new string[] { "7", "8", "9" },
         };
 
-        public string BoardAsString(string[][] array)
+        public string BoardAsString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (string[] row in array)
+            foreach (string[] row in Arr)
             {
                 foreach (string cell in row)
                 {
