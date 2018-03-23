@@ -26,5 +26,10 @@ namespace TicTacToeConsole
             }
             return sb.ToString();
         }
+
+        public void Update(int pos, string symbol)
+        {
+            Arr[(int)(pos - 1) / 3][(pos - 1) % 3] = symbol;
+        }
     }
 }
