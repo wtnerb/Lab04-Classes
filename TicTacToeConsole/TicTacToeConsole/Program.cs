@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace TicTacToeConsole
 {
@@ -7,6 +8,7 @@ namespace TicTacToeConsole
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine("Welcome to Brent's TicTacToe. To start the game ...");
         }
 
         public static bool IsWin(string[][] board)
@@ -36,6 +38,48 @@ namespace TicTacToeConsole
                 return true;
             }
             return false;
+        }
+
+        public static String[][] CreatePlayers()
+        {
+            string[][] output = 
+                {
+                    new String[] {"", ""},
+                    new String[] {"", ""}
+                };
+            Regex validName = new Regex("\\w+");
+            Regex validSymbol = new Regex("^[A-Z]$");
+            output[0][0] = CollectValidInput("Player 1's name.", validName, "Nothing is forbidden to player1");
+            
+        }
+
+        public string CollectValidInput(string prompt, Regex valid, string forbid)
+        {
+            byte count = 0;
+            while (count < 8)
+            {
+                Console.WriteLine($"Please insert {prompt}");
+                count++;
+                try
+                {
+                    string userInput = Console.ReadLine();
+                    if (forbid.IsMatch(userInput))
+                    {
+                        throw new Exception("invalid user input");
+                    }
+                    else if (valid.IsMatch(userInput))
+                    {
+                        return userInput;
+                    }
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Sorry, that input is invalid. Try again!");
+                }
+            }
+            Console.WriteLine("Too many invalid inputs.");
+            throw new Exception("too many invalid inputs");
         }
 
     }

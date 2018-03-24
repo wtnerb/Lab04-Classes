@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TicTacToeTest
+namespace TicTacToeConsole
 {
     public class Player
     {
@@ -11,7 +11,7 @@ namespace TicTacToeTest
             Name = name;
             if (symbol.Length != 1)
             {
-                throw new Exception("Player symbols can only be a single character");
+                throw new Exception("Player symbols can only be a single character string");
             }
             Symbol = symbol;
         }
