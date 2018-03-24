@@ -31,21 +31,50 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        [InlineData(())]
-        void CanDiscoverWin(string[] arr)
+        void CanDiscoverWin()
         {
-            string[] topWin = { "X", "X", "X", "4", "5", "6", "7", "8", "9" };
-            string[] bottomWin = { "1", "2", "3", "4", "5", "6", "X", "X", "X" };
-            string[] rightWin = { "1", "2", "O", "4", "5", "O", "7", "8", "O" };
-            string[] notWin = { "1", "X", "X", "4", "5", "6", "7", "8", "9" };
-            string[] diagWin = { "1", "X", "X", "4", "X", "6", "X", "8", "9" };
-            string[] diagonalWin = { "X", "X", "3", "4", "X", "6", "7", "8", "X" };
-            Assert.True(Board.Win(topWin));
-            Assert.True(Board.Win(bottomWin));
-            Assert.True(Board.Win(rightWin));
-            Assert.True(Board.Win(diagWin));
-            Assert.True(Board.Win(diagonalWin));
-            Assert.False(Board.Win(notWin));
+            string[][] topWin = 
+                {
+                    new string[] { "X", "X", "X" },
+                    new string[] {"4", "5", "6" },
+                    new string[] {"7", "8", "9" }
+                };
+            string[][] bottomWin =
+                {
+                    new string[] { "1", "X", "X" },
+                    new string[] {"4", "5", "6" },
+                    new string[] {"X", "X", "X" }
+                };
+            string[][] rightWin =
+                {
+                    new string[] { "X", "X", "O" },
+                    new string[] {"4", "5", "O" },
+                    new string[] {"7", "8", "O" }
+                };
+            string[][] notWin =
+                {
+                    new string[] { "x", "X", "X" },
+                    new string[] {"4", "5", "6" },
+                    new string[] {"7", "8", "9" }
+                };
+            string[][] diagWin =
+                {
+                    new string[] { "X", "2", "X" },
+                    new string[] {"4", "X", "6" },
+                    new string[] {"7", "8", "X" }
+                };
+            string[][] diagonalWin =
+                {
+                    new string[] { "O", "X", "X" },
+                    new string[] {"4", "X", "6" },
+                    new string[] {"X", "8", "9" }
+                };
+            Assert.True(Program.IsWin(topWin));
+            Assert.True(Program.IsWin(bottomWin));
+            Assert.True(Program.IsWin(rightWin));
+            Assert.True(Program.IsWin(diagWin));
+            Assert.True(Program.IsWin(diagonalWin));
+            Assert.False(Program.IsWin(notWin));
         }
     }
 }

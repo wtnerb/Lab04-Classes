@@ -32,6 +32,6 @@ namespace TicTacToeConsole
             Arr[(int)(pos - 1) / 3][(pos - 1) % 3] = symbol;
         }
 
-
+        
     }
 }
