@@ -40,6 +40,39 @@ namespace TicTacToeConsole
             Arr[(pos - 1) / 3][(pos - 1) % 3] = symbol;
         }
 
+        /// <summary>
+        /// Will analyze a board to find allowed inputs, returns as a string to be put into a RegEx (additional formatting required)
+        /// </summary>
+        /// <returns>Allowed moves in string, easy to pass into a RegEx</returns>
+        public string AllowedAsString()
+        {
+            StringBuilder sb = new StringBuilder();
+            Regex rx = new Regex("\\d");
+            foreach (string[] row in Arr)
+            {
+                foreach (string cell in row)
+                {
+                    if (rx.IsMatch(cell))
+                    {
+                        sb.Append(cell);
+                    }
+                }
+            }
+            return sb.ToString();
+        }
 
+        /// <summary>
+        /// The logic of each turn. Player will make a move and update the board.
+        /// </summary>
+        /// <param name="player">the Player whose turn it is</param>
+        /// <returns>The Board after the Player has made a move</returns>
+        public void Turn(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine($"It is now {player.Name}'s turn.");
+            Console.Write(BoardAsString());
+            string cell = Program.CollectValidInput("desired square", $"^[{AllowedAsString()}]$", "nothing");
+            Update(int.Parse(cell), player.Symbol);
+        }
     }
 }

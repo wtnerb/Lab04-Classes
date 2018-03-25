@@ -86,8 +86,8 @@ namespace TicTacToeTest
             brd1.Update(5, "X");
             brd1.Update(9, "O");
             Board board = new Board();
-            Assert.Equal("34678", Program.AllowedAsString(brd1));
-            Assert.Equal("123456789", Program.AllowedAsString(board));
+            Assert.Equal("34678", brd1.AllowedAsString());
+            Assert.Equal("123456789", board.AllowedAsString());
 
         }
     }

@@ -59,7 +59,7 @@ namespace TicTacToeConsole
         }
 
         /// <summary>
-        /// Checks to see if there is a win on the board.
+        /// Checks to see if there is a win on the board. This belongs in the board class but refactoring those tests would be too much work
         /// </summary>
         /// <param name="board">Board represented as a jagged array</param>
         /// <returns>true if win is found, false otherwise</returns>
@@ -130,44 +130,6 @@ namespace TicTacToeConsole
         }
 
         /// <summary>
-        /// The logic of each turn. Player will make a move and update the board.
-        /// </summary>
-        /// <param name="board">the Board the game is being played upon</param>
-        /// <param name="player">the Player whose turn it is</param>
-        /// <returns>The Board after the Player has made a move</returns>
-        public static Board Turn(Board board, Player player)
-        {
-            Console.Clear();
-            Console.WriteLine($"It is now {player.Name}'s turn.");
-            Console.Write(board.BoardAsString());
-            string cell = CollectValidInput("desired square", $"^[{AllowedAsString(board)}]$", "nothing");
-            board.Update(int.Parse(cell), player.Symbol);
-            return board;
-        }
-
-        /// <summary>
-        /// Will analyze a board to find allowed inputs, returns as a string to be put into a RegEx (additional formatting required)
-        /// </summary>
-        /// <param name="board">The board as it is</param>
-        /// <returns>Allowed moves in string, easy to pass into a RegEx</returns>
-        public static string AllowedAsString(Board board)
-        {
-            StringBuilder sb = new StringBuilder();
-            Regex rx = new Regex("\\d");
-            foreach (string[] row in board.Arr)
-            {
-                foreach (string cell in row)
-                {
-                    if (rx.IsMatch(cell))
-                    {
-                        sb.Append(cell);
-                    }
-                }
-            }
-            return sb.ToString();
-        }
-
-        /// <summary>
         /// p1 and p2 play TTT until one or the other wins OR 9 moves have been made without a win and there is a draw.
         /// </summary>
         /// <param name="p1">Player 1</param>
@@ -179,7 +141,7 @@ namespace TicTacToeConsole
             for (byte i = 0; i < 9; i++)
             {
                 Player current = (i % 2 == 0) ? p1 : p2;
-                board = Turn(board, current);
+                board.Turn(current);
                 if (IsWin(board.Arr))
                 {
                     Console.Clear();
@@ -192,6 +154,5 @@ namespace TicTacToeConsole
             Console.Write(board.BoardAsString());
             Console.WriteLine("Draw!");
         }
-
     }
 }
