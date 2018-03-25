@@ -13,7 +13,6 @@ namespace TicTacToeConsole
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             Console.WriteLine("Welcome to Brent's TicTacToe. To start the game ...");
             //Names can be one word long. This will be passed into a RegEx later.
             string validNameRx = "^\\w+$";
