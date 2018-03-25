@@ -80,13 +80,14 @@ namespace TicTacToeTest
         [Fact]
         public void CanIdentifyLegalMoves()
         {
-            string[][] brd1 = new string[][] { new string[] { "X", "O", "3" },
-                             new string[] { "4", "X", "6"},
-                             new string[] { "7", "8", "O" }
-            };
+            Board brd1 = new Board();
+            brd1.Update(1, "X");
+            brd1.Update(2, "O");
+            brd1.Update(5, "X");
+            brd1.Update(9, "O");
             Board board = new Board();
             Assert.Equal("34678", Program.AllowedAsString(brd1));
-            Assert.Equal("123456789", Program.AllowedAsString(board.Arr));
+            Assert.Equal("123456789", Program.AllowedAsString(board));
 
         }
     }
