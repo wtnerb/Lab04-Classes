@@ -12,7 +12,7 @@ namespace TicTacToeConsole
             Console.WriteLine("Hello World!");
             Console.WriteLine("Welcome to Brent's TicTacToe. To start the game ...");
             Console.Write("Player 1,");
-            string validNameRx = "^\\w$";
+            string validNameRx = "^\\w+$";
             string validLetter = "^[A-Z]$";
             string name = CollectValidInput("Player 1's name.", validNameRx, "Nothing is forbidden to player1");
             Console.WriteLine("Valid symbols are any capital letter.");
@@ -26,7 +26,8 @@ namespace TicTacToeConsole
             Player player2 = new Player(name, sym);
             Console.Clear();
             Console.WriteLine("Thank you both! The game is ready to begin.");
-            //PlayGame();
+            PlayGame(player1, player2);
+            Console.ReadKey();
         }
 
         public static bool IsWin(string[][] board)
@@ -113,6 +114,23 @@ namespace TicTacToeConsole
                 }
             }
             return sb.ToString();
+        }
+
+        public static void PlayGame(Player p1, Player p2)
+        {
+            Console.Clear();
+            Board board = new Board();
+            for (byte i = 0; i < 9; i++)
+            {
+                Player current = (i % 2 == 0) ? p1 : p2;
+                board = Turn(board, current);
+                if (IsWin(board.Arr))
+                {
+                    Console.WriteLine($"{current.Name} Wins!");
+                    return;
+                }
+            }
+            Console.WriteLine("Draw!");
         }
 
     }
