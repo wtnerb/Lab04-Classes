@@ -184,7 +184,7 @@ namespace TicTacToeConsole
                 if (IsWin(board.Arr))
                 {
                     Console.Clear();
-                    Console.Write(board.BoardAsString())
+                    Console.Write(board.BoardAsString());
                     Console.WriteLine($"{current.Name} Wins!");
                     return;
                 }
