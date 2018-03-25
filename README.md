@@ -1,5 +1,6 @@
 
 
+
 # TicTacToe with Classes
 
 ## Overview
@@ -39,5 +40,6 @@ https://docs.microsoft.com/en-us/ proved vital to the building of this project.
 ## Change log
 
 2018-03-23 0.9 released. Things were not functional yet, but the skeleton was there.
+
 2018-03-23 1.0 full release. Game is functional and MVP is reached.
 
