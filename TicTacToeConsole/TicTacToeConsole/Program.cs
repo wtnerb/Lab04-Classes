@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using TicTacToeConsole;
+using System.Text;
 
 namespace TicTacToeConsole
 {
@@ -9,6 +11,22 @@ namespace TicTacToeConsole
         {
             Console.WriteLine("Hello World!");
             Console.WriteLine("Welcome to Brent's TicTacToe. To start the game ...");
+            Console.Write("Player 1,");
+            string validNameRx = "^\\w$";
+            string validLetter = "^[A-Z]$";
+            string name = CollectValidInput("Player 1's name.", validNameRx, "Nothing is forbidden to player1");
+            Console.WriteLine("Valid symbols are any capital letter.");
+            string sym = CollectValidInput("Player 1's symbol", validLetter, "aa");
+            Player player1 = new Player(name, sym);
+            Console.Clear();
+            Console.WriteLine($"Thank you {player1.Name}, now press any key to set up player 2");
+            Console.ReadKey();
+            name = CollectValidInput("Player 2's name.", validNameRx, $"^{player1.Name}$");
+            sym = CollectValidInput("Player 2's symbol", validLetter, $"^{player1.Symbol}$");
+            Player player2 = new Player(name, sym);
+            Console.Clear();
+            Console.WriteLine("Thank you both! The game is ready to begin.");
+            //PlayGame();
         }
 
         public static bool IsWin(string[][] board)
@@ -33,37 +51,26 @@ namespace TicTacToeConsole
 
             //check diags, top left then top right
             if ((board[0][0] == board[1][1] && board[1][1] == board[2][2]) //diag including top left
-                || board[0][2] == board[1][1] && board[1][1] == board[2][0]) //diag incling top right
+                || (board[0][2] == board[1][1] && board[1][1] == board[2][0])) //diag incling top right
             {
                 return true;
             }
             return false;
         }
 
-        public static String[][] CreatePlayers()
-        {
-            string[][] output = 
-                {
-                    new String[] {"", ""},
-                    new String[] {"", ""}
-                };
-            Regex validName = new Regex("\\w+");
-            Regex validSymbol = new Regex("^[A-Z]$");
-            output[0][0] = CollectValidInput("Player 1's name.", validName, "Nothing is forbidden to player1");
-            
-        }
-
-        public string CollectValidInput(string prompt, Regex valid, string forbid)
+        public static string CollectValidInput(string prompt, string allowed, string forbid)
         {
             byte count = 0;
+            Regex valid = new Regex(allowed);
+            Regex forbidden = new Regex(forbid);
             while (count < 8)
             {
-                Console.WriteLine($"Please insert {prompt}");
+                Console.WriteLine($"Please provide {prompt}");
                 count++;
                 try
                 {
                     string userInput = Console.ReadLine();
-                    if (forbid.IsMatch(userInput))
+                    if (forbidden.IsMatch(userInput))
                     {
                         throw new Exception("invalid user input");
                     }
@@ -74,12 +81,38 @@ namespace TicTacToeConsole
                 }
                 catch
                 {
-                    Console.Clear();
                     Console.WriteLine("Sorry, that input is invalid. Try again!");
                 }
             }
             Console.WriteLine("Too many invalid inputs.");
             throw new Exception("too many invalid inputs");
+        }
+
+        public static Board Turn(Board board, Player player)
+        {
+            Console.Clear();
+            Console.WriteLine($"It is now {player.Name}'s turn.");
+            Console.Write(board.BoardAsString());
+            string cell = CollectValidInput("desired square", $"^[{AllowedAsString(board.Arr)}]$", "nothing");
+            board.Update(int.Parse(cell), player.Symbol);
+            return board;
+        }
+
+        public static string AllowedAsString(string[][] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            Regex rx = new Regex("\\d");
+            foreach (string[] row in array)
+            {
+                foreach (string cell in row)
+                {
+                    if (rx.IsMatch(cell))
+                    {
+                        sb.Append(cell);
+                    }
+                }
+            }
+            return sb.ToString();
         }
 
     }

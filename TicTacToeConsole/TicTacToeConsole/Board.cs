@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TicTacToeConsole
 {
@@ -32,6 +33,6 @@ namespace TicTacToeConsole
             Arr[(int)(pos - 1) / 3][(pos - 1) % 3] = symbol;
         }
 
-        
+
     }
 }
