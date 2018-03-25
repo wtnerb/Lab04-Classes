@@ -23,7 +23,7 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        void CanMakePlayer()
+        public void CanMakePlayer()
         {
             Player tom = new Player("Tom", "A");
             Assert.Equal("Tom", tom.Name);
@@ -31,7 +31,7 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        void CanDiscoverWin()
+        public void CanDiscoverWin()
         {
             string[][] topWin = 
                 {
@@ -75,6 +75,20 @@ namespace TicTacToeTest
             Assert.True(Program.IsWin(diagWin));
             Assert.True(Program.IsWin(diagonalWin));
             Assert.False(Program.IsWin(notWin));
+        }
+
+        [Fact]
+        public void CanIdentifyLegalMoves()
+        {
+            Board brd1 = new Board();
+            brd1.Update(1, "X");
+            brd1.Update(2, "O");
+            brd1.Update(5, "X");
+            brd1.Update(9, "O");
+            Board board = new Board();
+            Assert.Equal("34678", brd1.AllowedAsString());
+            Assert.Equal("123456789", board.AllowedAsString());
+
         }
     }
 }
