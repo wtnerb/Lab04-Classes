@@ -32,8 +32,31 @@ namespace TicTacToeConsole
             Player player2 = new Player(name, sym);
             Console.Clear();
             Console.WriteLine("Thank you both! The game is ready to begin.");
-            PlayGame(player1, player2);
-            Console.ReadKey();
+
+            //Actual game play
+            bool playing = true;
+            //Count will flip true/false with each full game so players alternate first move
+            bool count = false;
+            while (playing)
+            {
+                if (count)
+                {
+                    PlayGame(player2, player1);
+                }
+                else
+                {
+                    PlayGame(player1, player2);
+                }
+                string again = CollectValidInput("would like to play again y/n", "^[yYnN]$", "nothing");
+                if (again.ToUpper() == "Y")
+                {
+                    count = !count;
+                }
+                else
+                {
+                    playing = false;
+                }
+            }
         }
 
         /// <summary>
@@ -160,6 +183,8 @@ namespace TicTacToeConsole
                 board = Turn(board, current);
                 if (IsWin(board.Arr))
                 {
+                    Console.Clear();
+                    Console.Write(board.BoardAsString())
                     Console.WriteLine($"{current.Name} Wins!");
                     return;
                 }
