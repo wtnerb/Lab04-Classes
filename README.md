@@ -1,3 +1,5 @@
+
+
 # TicTacToe with Classes
 
 ## Overview
@@ -28,6 +30,14 @@ Please provide desired square
 
 The game will automatically notice a win or draw and end the game.
 
+## Architecture
+The Board class holds the board interactive parts of the program. The Player class makes players with a matching name and symbol. The Program itself holds interaction with the user and the console, as well as game flow logic. NOTE: Ideally, the win detection method would be moved into the board class, but the tests for it had been written assuming it's current place and because of time constraints refactoring those tests was deemed not doable for initial release.
+
 ## Sources
 https://docs.microsoft.com/en-us/ proved vital to the building of this project.
+
+## Change log
+
+2018-03-23 0.9 released. Things were not functional yet, but the skeleton was there.
+2018-03-23 1.0 full release. Game is functional and MVP is reached.
 
