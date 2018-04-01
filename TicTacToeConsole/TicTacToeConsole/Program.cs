@@ -140,6 +140,7 @@ namespace TicTacToeConsole
         /// <returns>true if valid, false if invalid</returns>
         public static bool Valid (string input, string allowed, string forbid)
         {
+            //Tested in CanVaidateInput
             Regex valid = new Regex(allowed);
             Regex forbidden = new Regex(forbid);
             return valid.IsMatch(input) && !forbidden.IsMatch(input);

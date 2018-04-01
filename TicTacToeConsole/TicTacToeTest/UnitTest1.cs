@@ -144,7 +144,7 @@ namespace TicTacToeTest
         [InlineData(false, "j4mes", "^[a-z]+$", "\\d")]
         [InlineData(false, "j4mes", "^\\w+$", "\\d")]
         [InlineData(false, "J", "^\\w$", "[A-Z]")]
-        public void CanValidateUserInput(bool expect, string input, string valid, string forbid)
+        public void CanValidateInput(bool expect, string input, string valid, string forbid)
         {
             Assert.Equal(expect, Program.Valid(input, valid, forbid));
         }
