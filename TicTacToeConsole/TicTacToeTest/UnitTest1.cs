@@ -6,6 +6,16 @@ namespace TicTacToeTest
     public class UnitTest1
     {
         [Fact]
+        public void CanMakeBoard()
+        {
+            Board b = new Board();
+            string[][] a = new string[][] { new string[] { "1", "2", "3" },
+                                            new string[] { "4", "5", "6" },
+                                            new string[] { "7", "8", "9" } };
+            Assert.Equal(a, b.Arr);
+        }
+                                            
+        [Fact]
         public void CanMakeBoardString()
         {
             Board x = new Board();

@@ -14,8 +14,10 @@ namespace TicTacToeConsole
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Brent's TicTacToe. To start the game ...");
+
             //Names can be one word long. This will be passed into a RegEx later.
             string validNameRx = "^\\w+$";
+
             //Only a single, capital letter can be the symbol. This will be passed into a RegEx later.
             string validLetter = "^[A-Z]$";
             string name = CollectValidInput("Player 1's name.", validNameRx, "Nothing is forbidden to player1");
@@ -59,12 +61,13 @@ namespace TicTacToeConsole
         }
 
         /// <summary>
-        /// Checks to see if there is a win on the board. This belongs in the board class but refactoring those tests would be too much work
+        /// Checks to see if there is a win on the board. This belongs in the board class.
         /// </summary>
         /// <param name="board">Board represented as a jagged array</param>
         /// <returns>true if win is found, false otherwise</returns>
         public static bool IsWin(string[][] board)
         {
+            //tested in CanDiscoverWin
             //check row
             foreach (string[] row in board)
             {
@@ -101,6 +104,7 @@ namespace TicTacToeConsole
         /// <returns>a valid input or an app breaking exception if too many invalid inputs are provided</returns>
         public static string CollectValidInput(string prompt, string allowed, string forbid)
         {
+            //Collects user input and is not testable
             byte count = 0;
             Regex valid = new Regex(allowed);
             Regex forbidden = new Regex(forbid);

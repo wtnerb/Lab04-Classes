@@ -10,6 +10,7 @@ namespace TicTacToeConsole
         //Every board starts the same. This will hold the board.
         public string[][] Arr { get; private set; } = new string[][]
         {
+            //Tested in CanMakeBoard()
             new string[] { "1", "2", "3" },
             new string[] { "4", "5", "6" },
             new string[] { "7", "8", "9" },
@@ -18,6 +19,7 @@ namespace TicTacToeConsole
         //Renders a gameboard as a string easily printed to the console
         public string BoardAsString()
         {
+            //Tested in CanMakeBoardString()
             StringBuilder sb = new StringBuilder();
             foreach (string[] row in Arr)
             {
@@ -37,6 +39,7 @@ namespace TicTacToeConsole
         /// <param name="symbol">The symbol to be placed in that position</param>
         public void Update(int pos, string symbol)
         {
+            //Tested in CanEditBoard()
             Arr[(pos - 1) / 3][(pos - 1) % 3] = symbol;
         }
 
@@ -46,6 +49,7 @@ namespace TicTacToeConsole
         /// <returns>Allowed moves in string, easy to pass into a RegEx</returns>
         public string AllowedAsString()
         {
+            //Tested in CanIdentifyLegalMoves()
             StringBuilder sb = new StringBuilder();
             Regex rx = new Regex("\\d");
             foreach (string[] row in Arr)
