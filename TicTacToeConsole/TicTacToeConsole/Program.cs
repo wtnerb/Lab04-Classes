@@ -106,8 +106,6 @@ namespace TicTacToeConsole
         {
             //Collects user input and is not testable
             byte count = 0;
-            Regex valid = new Regex(allowed);
-            Regex forbidden = new Regex(forbid);
             while (count < 8)
             {
                 Console.WriteLine($"Please provide {prompt}");
@@ -115,13 +113,13 @@ namespace TicTacToeConsole
                 try
                 {
                     string userInput = Console.ReadLine();
-                    if (forbidden.IsMatch(userInput))
-                    {
-                        throw new Exception("invalid user input");
-                    }
-                    else if (valid.IsMatch(userInput))
+                    if (Valid(userInput, allowed, forbid))
                     {
                         return userInput;
+                    }
+                    else
+                    {
+                        throw new Exception("invalid user input");
                     }
                 }
                 catch
@@ -131,6 +129,21 @@ namespace TicTacToeConsole
             }
             Console.WriteLine("Too many invalid inputs.");
             throw new Exception("too many invalid inputs");
+        }
+
+        /// <summary>
+        /// Checks input against provided regex conditions
+        /// </summary>
+        /// <param name="input">String being checked</param>
+        /// <param name="allowed">string of Regex pattern of allowed values</param>
+        /// <param name="forbid">string of Regex pattern of forbidden values</param>
+        /// <returns>true if valid, false if invalid</returns>
+        public static bool Valid (string input, string allowed, string forbid)
+        {
+            //Tested in CanVaidateInput
+            Regex valid = new Regex(allowed);
+            Regex forbidden = new Regex(forbid);
+            return valid.IsMatch(input) && !forbidden.IsMatch(input);
         }
 
         /// <summary>

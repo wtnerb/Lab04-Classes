@@ -136,5 +136,17 @@ namespace TicTacToeTest
             Board board = new Board();
             Assert.Equal("123456789", board.AllowedAsString());
         }
+
+        [Theory]
+        [InlineData(true, "james", "^[a-z]+$", "\\d")]
+        [InlineData(true, "J", "^[A-Z]+$", "\\d")]
+        [InlineData(false, "james smith", "^[a-z]+$", "\\d")]
+        [InlineData(false, "j4mes", "^[a-z]+$", "\\d")]
+        [InlineData(false, "j4mes", "^\\w+$", "\\d")]
+        [InlineData(false, "J", "^\\w$", "[A-Z]")]
+        public void CanValidateInput(bool expect, string input, string valid, string forbid)
+        {
+            Assert.Equal(expect, Program.Valid(input, valid, forbid));
+        }
     }
 }
