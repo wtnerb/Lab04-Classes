@@ -6,6 +6,16 @@ namespace TicTacToeTest
     public class UnitTest1
     {
         [Fact]
+        public void CanMakeBoard()
+        {
+            Board b = new Board();
+            string[][] a = new string[][] { new string[] { "1", "2", "3" },
+                                            new string[] { "4", "5", "6" },
+                                            new string[] { "7", "8", "9" } };
+            Assert.Equal(a, b.Arr);
+        }
+                                            
+        [Fact]
         public void CanMakeBoardString()
         {
             Board x = new Board();
@@ -23,72 +33,108 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        public void CanMakePlayer()
+        public void CanMakePlayerName()
         {
             Player tom = new Player("Tom", "A");
             Assert.Equal("Tom", tom.Name);
+        }
+
+        [Fact]
+        public void CanMakePlayerSymbol()
+        {
+            Player tom = new Player("Tom", "A");
             Assert.Equal("A", tom.Symbol);
+
         }
 
         [Fact]
         public void CanDiscoverWin()
         {
-            string[][] topWin = 
-                {
-                    new string[] { "X", "X", "X" },
-                    new string[] {"4", "5", "6" },
-                    new string[] {"7", "8", "9" }
-                };
-            string[][] bottomWin =
-                {
-                    new string[] { "1", "X", "X" },
-                    new string[] {"4", "5", "6" },
-                    new string[] {"X", "X", "X" }
-                };
-            string[][] rightWin =
-                {
-                    new string[] { "X", "X", "O" },
-                    new string[] {"4", "5", "O" },
-                    new string[] {"7", "8", "O" }
-                };
-            string[][] notWin =
-                {
-                    new string[] { "x", "X", "X" },
-                    new string[] {"4", "5", "6" },
-                    new string[] {"7", "8", "9" }
-                };
-            string[][] diagWin =
-                {
-                    new string[] { "X", "2", "X" },
-                    new string[] {"4", "X", "6" },
-                    new string[] {"7", "8", "X" }
-                };
             string[][] diagonalWin =
                 {
                     new string[] { "O", "X", "X" },
                     new string[] {"4", "X", "6" },
                     new string[] {"X", "8", "9" }
                 };
-            Assert.True(Program.IsWin(topWin));
-            Assert.True(Program.IsWin(bottomWin));
-            Assert.True(Program.IsWin(rightWin));
-            Assert.True(Program.IsWin(diagWin));
             Assert.True(Program.IsWin(diagonalWin));
+        }
+
+        [Fact]
+        public void NoFalseWin()
+        {            
+            string[][] notWin =
+                {
+                    new string[] { "x", "X", "X" },
+                    new string[] {"4", "5", "6" },
+                    new string[] {"7", "8", "9" }
+                };
             Assert.False(Program.IsWin(notWin));
+        }
+
+        [Fact]
+        public void CanDiscoverTopWin()
+        {
+            string[][] Win =
+                {
+                    new string[] { "X", "X", "X" },
+                    new string[] {"4", "5", "6" },
+                    new string[] {"7", "8", "9" }
+                };
+            Assert.True(Program.IsWin(Win));
+        }
+
+        [Fact]
+        public void CanDiscoverBottomWin()
+        {
+            string[][] Win =
+                    {
+                    new string[] { "1", "X", "X" },
+                    new string[] {"4", "5", "6" },
+                    new string[] {"X", "X", "X" }
+                };
+            Assert.True(Program.IsWin(Win));
+        }
+
+        [Fact]
+        public void CanDiscoverRightWin()
+        {
+            string[][] Win =
+                {
+                    new string[] { "X", "X", "O" },
+                    new string[] {"4", "5", "O" },
+                    new string[] {"7", "8", "O" }
+                };
+            Assert.True(Program.IsWin(Win));
+        }
+
+        [Fact]
+        public void CanDiscoverDiagWin()
+        {
+            string[][] Win =
+                {
+                    new string[] { "X", "2", "X" },
+                    new string[] {"4", "X", "6" },
+                    new string[] {"7", "8", "X" }
+                };
+            Assert.True(Program.IsWin(Win));
         }
 
         [Fact]
         public void CanIdentifyLegalMoves()
         {
-            Board brd1 = new Board();
-            brd1.Update(1, "X");
-            brd1.Update(2, "O");
-            brd1.Update(5, "X");
-            brd1.Update(9, "O");
             Board board = new Board();
-            Assert.Equal("34678", brd1.AllowedAsString());
-            Assert.Equal("123456789", board.AllowedAsString());
+            board.Update(1, "X");
+            board.Update(2, "O");
+            board.Update(5, "X");
+            board.Update(9, "O");
+            Assert.Equal("34678", board.AllowedAsString());
+        }
 
+        [Fact]
+        public void CanIdentifyMoreLegalMoves()
+        {
+            Board board = new Board();
+            Assert.Equal("123456789", board.AllowedAsString());
         }
     }
 }

@@ -13,6 +13,7 @@ namespace TicTacToeConsole
         /// <param name="symbol">Player symbol</param>
         public Player(string name, string symbol)
         {
+            //Tested in CanMakePlayer
             Name = name;
             if (symbol.Length != 1)
             {
@@ -20,7 +21,7 @@ namespace TicTacToeConsole
             }
             Symbol = symbol;
         }
-        public string Name { get; private set;}
-        public string Symbol { get; private set; }
+        public string Name { get; }
+        public string Symbol { get; }
     }
 }
